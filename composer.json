@@ -1,0 +1,29 @@
+{
+    "name": "scholte/uri",
+    "description": "RFC 3986 PHP URI extension",
+    "version": "1.0.0",
+    "require": {
+        "php": ">=7.1",
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
+    },
+    "type": "library",
+    "authors": [
+        {
+            "name": "Christiaan Scholte",
+            "email": "cscholte_83@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Scholte\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Scholte\\": "tests"
+        }
+    }
+}
