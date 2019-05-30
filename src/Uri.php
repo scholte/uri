@@ -113,26 +113,30 @@ class Uri implements PsrUriInterface, UriInterface
      */
     public function __construct(string $uri = '', HostInterface $host = null, QueryParametersInterface $queryParameters = null)
     {
-        // Default values
-        if ($host === null) {
-            $host = new Host();
-        }
-        $this->setHost($host);
-
-        if ($queryParameters === null) {
-            $queryParameters = new QueryParameters();
-        }
-        $this->setQuery($queryParameters);
-
         if (!empty($uri)) {
             $this->parse($uri);
+        }
+
+        // Default values
+        if ($host instanceof HostInterface) {
+            $this->host = $host;
+        }
+        if ($this->host === null) {
+            $this->host = new Host();
+        }
+
+        if ($queryParameters instanceof QueryParametersInterface) {
+            $this->queryParameters = $queryParameters;
+        }
+        if ($this->queryParameters === null) {
+            $this->queryParameters = new QueryParameters();
         }
     }
 
     /**
      * Change to string
      *
-     * @return mixed
+     * @return string
      */
     public function __toString() : string
     {
