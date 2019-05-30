@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace Scholte\Uri;
 
 define('URI_STRIP_SUB_DOMAIN', 128);

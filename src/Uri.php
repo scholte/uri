@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace Scholte;
 
 use Psr\Http\Message\UriInterface as PsrUriInterface;
