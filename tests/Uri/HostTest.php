@@ -81,8 +81,8 @@ class HostTest extends TestCase
 
     public function testParseIncludingScheme()
     {
-        $host = new Host('http://www.test.com');
-        $this->assertEquals('www', $host->getSubDomain());
+        $host = new Host('http://sub.sub2.test.com');
+        $this->assertEquals('sub.sub2', $host->getSubDomain());
         $this->assertEquals('test', $host->getRootDomain());
         $this->assertEquals('com', $host->getTopLevelDomain());
     }
