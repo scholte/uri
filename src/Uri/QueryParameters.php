@@ -31,7 +31,7 @@ class QueryParameters implements QueryParametersInterface
     /**
      * Change to string
      *
-     * @return mixed
+     * @return string
      */
     public function __toString() : string
     {

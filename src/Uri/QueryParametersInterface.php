@@ -12,7 +12,7 @@ interface QueryParametersInterface
     /**
      * Change to string
      *
-     * @return mixed
+     * @return string
      */
     public function __toString() : string;
 
