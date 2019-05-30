@@ -84,7 +84,7 @@ class Host implements HostInterface
             $defaultInfo['ip'] = substr($host, 1, -1);
 
         // Default host
-        } elseif (preg_match('/([a-z0-9-]*?)(\.?([^.]+))\.([^.]+)$/', $host, $matches)) {
+        } elseif (preg_match('/([a-z0-9-\.]*?)(\.?([^.]+))\.([^.]+)$/', $host, $matches)) {
             $defaultInfo = array_merge(
                 $defaultInfo,
                 [

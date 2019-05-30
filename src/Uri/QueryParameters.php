@@ -84,7 +84,7 @@ class QueryParameters implements QueryParametersInterface
     {
         $this->values = [];
         foreach ($values as $key => $value) {
-            $this->addValue($key, $value);
+            $this->addValue($key, (string) $value);
         }
 
         return $this;
