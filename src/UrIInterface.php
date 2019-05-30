@@ -1,8 +1,8 @@
 <?php
+declare(strict_types = 1);
+
 namespace Scholte;
 
-use Scholte\Uri\HostInterface;
-use Scholte\Uri\QueryParametersInterface;
 
 /**
  * Interface UriInterface
@@ -46,9 +46,9 @@ interface UriInterface
     /**
      * Get host
      *
-     * @return HostInterface
+     * @return string
      */
-    public function getHost() : HostInterface;
+    public function getHost() : string;
 
     /**
      * Get port
@@ -88,9 +88,9 @@ interface UriInterface
     /**
      * Retr;ieve the query string of the URI.
      *
-     * @return QueryParametersInterface
+     * @return string
      */
-    public function getQuery() : QueryParametersInterface;
+    public function getQuery() : string;
 
     /**
      * Get fragment

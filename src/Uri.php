@@ -1,11 +1,13 @@
 <?php
+declare(strict_types = 1);
+
 namespace Scholte;
 
 use Psr\Http\Message\UriInterface as PsrUriInterface;
-use Scholte\Uri\HostInterface;
 use Scholte\Uri\Host;
-use Scholte\Uri\QueryParametersInterface;
+use Scholte\Uri\HostInterface;
 use Scholte\Uri\QueryParameters;
+use Scholte\Uri\QueryParametersInterface;
 
 define('URI_STRIP_SCHEME', 1);
 define('URI_STRIP_HOST', 2);
@@ -111,26 +113,30 @@ class Uri implements PsrUriInterface, UriInterface
      */
     public function __construct(string $uri = '', HostInterface $host = null, QueryParametersInterface $queryParameters = null)
     {
-        // Default values
-        if ($host === null) {
-            $host = new Host();
-        }
-        $this->setHost($host);
-
-        if ($queryParameters === null) {
-            $queryParameters = new QueryParameters();
-        }
-        $this->setQuery($queryParameters);
-
         if (!empty($uri)) {
             $this->parse($uri);
+        }
+
+        // Default values
+        if ($host instanceof HostInterface) {
+            $this->host = $host;
+        }
+        if ($this->host === null) {
+            $this->host = new Host();
+        }
+
+        if ($queryParameters instanceof QueryParametersInterface) {
+            $this->queryParameters = $queryParameters;
+        }
+        if ($this->queryParameters === null) {
+            $this->queryParameters = new QueryParameters();
         }
     }
 
     /**
      * Change to string
      *
-     * @return mixed
+     * @return string
      */
     public function __toString() : string
     {
@@ -399,7 +405,7 @@ class Uri implements PsrUriInterface, UriInterface
     public function setScheme(string $scheme)
     {
         $this->scheme = strtolower($scheme);
-        if (($defaultPort = array_search($scheme, $this->defaultSchemePorts)) !== false) {
+        if (($defaultPort = (int) array_search($scheme, $this->defaultSchemePorts)) !== false) {
             $this->port = $defaultPort;
         }
 
@@ -433,11 +439,11 @@ class Uri implements PsrUriInterface, UriInterface
     /**
      * Get host
      *
-     * @return HostInterface
+     * @return string
      */
-    public function getHost() : HostInterface
+    public function getHost() : string
     {
-        return $this->host;
+        return (string) $this->host;
     }
 
     /**
@@ -561,11 +567,11 @@ class Uri implements PsrUriInterface, UriInterface
     /**
      * Retrieve the query string of the URI.
      *
-     * @return QueryParametersInterface
+     * @return string
      */
-    public function getQuery() : QueryParametersInterface
+    public function getQuery() : string
     {
-        return $this->queryParameters;
+        return (string) $this->queryParameters;
     }
 
     /**
@@ -614,11 +620,11 @@ class Uri implements PsrUriInterface, UriInterface
      * Return an instance with the specified user information.
      *
      * @param string $user The user name to use for authority.
-     * @param null|string $password The password associated with $user.
+     * @param string $password The password associated with $user.
      *
      * @return static
      */
-    public function withUserInfo($user, $password = null)
+    public function withUserInfo($user, $password = '')
     {
         if ($this->username == $user && $this->password == $password) {
             return $this;
@@ -654,12 +660,12 @@ class Uri implements PsrUriInterface, UriInterface
     /**
      * Return an instance with the specified port.
      *
-     * @param null|int $port The port to use with the new instance; a null value
-     *     removes the port information.
+     * @param int $port The port to use with the new instance; a null value
+     *                  removes the port information.
      *
      * @return static
      */
-    public function withPort($port)
+    public function withPort($port = 0)
     {
         if ($this->port == $port) {
             return $this;

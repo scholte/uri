@@ -79,6 +79,14 @@ class HostTest extends TestCase
         $this->assertEquals('192.168.1.1', $host->getIp());
     }
 
+    public function testParseIncludingScheme()
+    {
+        $host = new Host('http://www.test.com');
+        $this->assertEquals('www', $host->getSubDomain());
+        $this->assertEquals('test', $host->getRootDomain());
+        $this->assertEquals('com', $host->getTopLevelDomain());
+    }
+
     /**
      * Test providing an invalid IP address
      * 

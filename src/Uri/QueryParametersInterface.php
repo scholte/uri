@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace Scholte\Uri;
 
 /**
@@ -10,7 +12,7 @@ interface QueryParametersInterface
     /**
      * Change to string
      *
-     * @return mixed
+     * @return string
      */
     public function __toString() : string;
 

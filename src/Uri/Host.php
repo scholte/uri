@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace Scholte\Uri;
 
 define('URI_STRIP_SUB_DOMAIN', 128);
@@ -81,8 +83,8 @@ class Host implements HostInterface
         ) {
             $defaultInfo['ip'] = substr($host, 1, -1);
 
-            // Default host
-        } elseif (preg_match('/(.*?)(\.?([^.]+))\.([^.]+)$/', $host, $matches)) {
+        // Default host
+        } elseif (preg_match('/([a-z0-9-]*?)(\.?([^.]+))\.([^.]+)$/', $host, $matches)) {
             $defaultInfo = array_merge(
                 $defaultInfo,
                 [

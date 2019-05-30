@@ -1,0 +1,5 @@
+#!/bin/bash
+
+php vendor/bin/phpunit
+php vendor/bin/phpstan analyse -l max ./src
+php vendor/bin/ecs check src --level clean-code
